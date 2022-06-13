@@ -36,7 +36,8 @@ public class PostgresSqlBirdRepository implements BirdRepository {
             preparedStatement.execute();
         } catch (SQLException exception){
             System.out.println("Error DB....: "  + exception.getMessage());
-            throw new RuntimeException("Error query ng database", exception);
+            throw new RuntimeException("Error query database", exception);
+
         }
 
     }

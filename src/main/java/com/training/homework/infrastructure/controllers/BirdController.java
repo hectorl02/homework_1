@@ -40,9 +40,17 @@ public class BirdController {
                     Map.of("error", e.getMessage()));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(applicationError);
         } catch (Exception e){
-            ApplicationError applicationError = new ApplicationError("SystemError", "Try more later", Map.of());
-            System.out.println("Error......: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(applicationError);
+            if (e.getCause().toString().contains("already exists")) {
+                ApplicationError applicationError = new ApplicationError("InputDataValidationError", "Repeat input data", Map.of(
+                        "error", "already exists"
+                ));
+                System.out.println("Error......: " + e.getMessage());
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(applicationError);
+            } else {
+                ApplicationError applicationError = new ApplicationError("SystemError", "Try more later", Map.of());
+                System.out.println("Error......: " + e.getMessage());
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(applicationError);
+            }
         }
     }
 
