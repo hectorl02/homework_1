@@ -10,6 +10,9 @@ public class BirdDTO {
     private String zoneName;
     private Integer confirmedQuantity;
 
+    private String status;
+
+
     public BirdDTO() {
     }
 
@@ -79,6 +82,14 @@ public class BirdDTO {
 
     public void setConfirmedQuantity(Integer confirmedQuantity) {
         this.confirmedQuantity = confirmedQuantity;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

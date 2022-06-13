@@ -1,14 +1,30 @@
 package com.training.homework.birds.application.services;
 
+import com.training.homework.birds.application.domain.Bird;
+import com.training.homework.birds.application.domain.valueObjs.BirdCommonName;
+import com.training.homework.birds.application.domain.valueObjs.BirdConfirmedQuantity;
+import com.training.homework.birds.application.domain.valueObjs.BirdScientificName;
+import com.training.homework.birds.application.domain.valueObjs.BirdZoneName;
 import com.training.homework.birds.application.ports.input.CreateBirdUseCase;
+import com.training.homework.birds.application.ports.output.BirdRepository;
 import com.training.homework.infrastructure.models.BirdDTO;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CreateBirdService implements CreateBirdUseCase {
-
+    private final BirdRepository birdRepository;
+    public CreateBirdService(BirdRepository birdRepository) {
+        this.birdRepository = birdRepository;
+    }
     @Override
     public BirdDTO execute(BirdDTO birdDTO) {
-        return null;
+        Bird bird = new Bird(null,
+                        new BirdCommonName(birdDTO.getCommonName()),
+                        new BirdScientificName(birdDTO.getScientificName()),
+                        new BirdZoneName(birdDTO.getZoneName()),
+                        new BirdConfirmedQuantity(birdDTO.getConfirmedQuantity()));
+        birdRepository.store(bird);
+        birdDTO.setStatus("Created");
+        return birdDTO;
     }
 }

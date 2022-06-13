@@ -50,7 +50,7 @@ public class BirdDAO {
         birdDAO.setId(resultSet.getLong("id"));
         birdDAO.setCommonName(resultSet.getString("common_name"));
         birdDAO.setScientificName(resultSet.getString("scientific_name"));
-        birdDAO.setZoneName(resultSet.getString("zon_name"));
+        birdDAO.setZoneName(resultSet.getString("zone_name"));
         birdDAO.setConfirmedQuantity(resultSet.getInt("confirmed_quantity"));
         return birdDAO;
     }
